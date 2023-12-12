@@ -7,6 +7,25 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 #seed users
+
+AdminUser.create!(
+  first_name: 'Admin',
+  last_name: 'User',
+  email: 'admin@example.com',
+  password: 'password',
+  password_confirmation: 'password'
+)
+
+AdminUser.create!(
+  first_name: 'Physician',
+  last_name: 'User',
+  email: 'physician@example.com',
+  password: 'password',
+  password_confirmation: 'password',
+  role: 'physician'
+)
+
+
 user = User.new(
   email: 'user1@example.com',
   password: '123456',

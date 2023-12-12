@@ -4,6 +4,20 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
 
+  belongs_to :admin_user, foreign_key: :physician_id, optional: true
+
+  def self.ransackable_associations(auth_object = nil)
+    []
+  end
+
+ def self.ransackable_attributes(auth_object = nil)
+    ["address_line_1", "address_line_2", "city", "confirmation_sent_at",
+      "confirmation_token", "date_of_birth",
+      "email",  "first_name", "gender", "id", "last_name",
+      "phone_number", "physician_id",
+      "reset_password_token", "role", "state",
+      "unconfirmed_email", "zip"]
+  end
 
   valid_states = [
     "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado",

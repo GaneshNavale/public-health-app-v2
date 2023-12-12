@@ -13,3 +13,45 @@
  *= require_tree .
  *= require_self
  */
+// @import "trestle/custom/my_custom_css";
+
+$white-color: #cccccc;
+$bg-background: #595f63;
+
+.navbar {
+	background-color: $bg-background !important;
+	a {
+		color: $white-color !important;
+    text-decoration: none;
+	}
+}
+
+form .form-group {
+  input[type=text] {
+    width: 100%;
+  }
+  input[type=password] {
+    width: 100%;
+  }
+  input[type=email] {
+    width: 100%;
+  }
+  input[type=number] {
+    width: 100%;
+  }
+  input[type=url] {
+    width: 100%;
+  }
+  input[type=tel] {
+    width: 100%;
+  }
+  input[type=date] {
+    width: 100%;
+  }
+  input[type=time] {
+    width: 100%;
+  }
+  textarea {
+    width: 100%;
+  }
+}
