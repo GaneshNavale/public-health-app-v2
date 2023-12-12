@@ -13,3 +13,16 @@
  *= require_tree .
  *= require_self
  */
+// @import "trestle/custom/my_custom_css";
+
+$white-color: #cccccc;
+$bg-background: #595f63;
+
+.navbar {
+	background-color: $bg-background !important;
+	a {
+		color: $white-color !important;
+    text-decoration: none;
+	}
+}
+

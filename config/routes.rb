@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   resources :resources
+  resources :local_resources
   post '/save_answers', to: 'responses#create', as: 'save_answers'
   resources :surveys do
     resources :responses
@@ -16,6 +19,5 @@ Rails.application.routes.draw do
 
   get 'home/index'
   root "home#index"
-
 
 end
