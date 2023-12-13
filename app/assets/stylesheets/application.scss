@@ -19,36 +19,36 @@ $white-color: #cccccc;
 $bg-background: #595f63;
 
 .navbar {
-	background-color: $bg-background !important;
-	a {
-		color: $white-color !important;
+  background-color: $bg-background !important;
+  a {
+    color: $white-color !important;
     text-decoration: none;
-	}
+  }
 }
 
 form .form-group {
-  input[type=text] {
+  input[type="text"] {
     width: 100%;
   }
-  input[type=password] {
+  input[type="password"] {
     width: 100%;
   }
-  input[type=email] {
+  input[type="email"] {
     width: 100%;
   }
-  input[type=number] {
+  input[type="number"] {
     width: 100%;
   }
-  input[type=url] {
+  input[type="url"] {
     width: 100%;
   }
-  input[type=tel] {
+  input[type="tel"] {
     width: 100%;
   }
-  input[type=date] {
+  input[type="date"] {
     width: 100%;
   }
-  input[type=time] {
+  input[type="time"] {
     width: 100%;
   }
   textarea {
