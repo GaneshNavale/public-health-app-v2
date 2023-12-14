@@ -1,7 +1,9 @@
-<h1>Select Language</h1>
+<div class="container pt-5">
+  <h1>Select Language</h1>
 
-<ul>
-  <% @languages.each do |language| %>
-    <li><%= link_to language, get_questions_path(survey_id: @survey.id, language: language) %></li>
-  <% end %>
-</ul>
+  <ul>
+    <% @languages.each do |language| %>
+      <li><%= link_to language, get_questions_path(survey_id: @survey.id, language: language) %></li>
+    <% end %>
+  </ul>
+</div>

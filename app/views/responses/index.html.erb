@@ -1,40 +1,44 @@
-<% if @responses.present? %>
-  <h2> Most Recent Response to the "<%= @survey.survey_name%>" Survey</h2>
-  <p> Survey Completed on <%= @latest_time_submitted.localtime.strftime("%B %d, %Y")%></p>
+<div class="container pt-5">
+  <% if @responses.present? %>
+    <h2> Most Recent Response to the "<%= @survey.survey_name%>" Survey</h2>
+    <p> Survey Completed on <%= @latest_time_submitted.localtime.strftime("%B %d, %Y")%></p>
 
-  <% if @category.present? %>
-    <p> Category: <%= @category[:category] %> </p>
-  <% end %>
-  <p> <%= link_to "See Resources", resources_path(category: @survey.survey_category) %> </p>
+    <% if @category.present? %>
+      <p> Category: <%= @category[:category] %> </p>
+    <% end %>
+    <p>
+      <%= link_to "See Resources", resources_path(category: @survey.survey_category) %>
+    </p>
 
-  <%= form_tag survey_responses_path(@survey, language: @language), method: :get do %>
-      <%= select_tag :language, options_for_select(@survey.languages, @language) %>
-      <%= submit_tag "Change Language" %>
+    <%= form_tag survey_responses_path(@survey, language: @language), method: :get do %>
+        <%= select_tag :language, options_for_select(@survey.languages, @language) %>
+        <%= submit_tag "Change Language", class: "btn btn-secondary" %>
 
-<% end %>
+    <% end %>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Question</th>
-        <th>Response</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @responses.each do |response| %>
+    <table class="table table-light table-borderless">
+      <thead class="thead-light">
         <tr>
-          <td><%= @questions.where(question_number: response.question_number).first.question_text %></td>
-          <td><%= response.response_option_number.nil? ? "" : @questions.where(question_number: response.question_number).first.options_list[response.response_option_number] %></td>
+          <th>Question</th>
+          <th>Response</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
 
-  <br>
-  <%= link_to 'Back to Surveys', surveys_path %>
+      <tbody>
+        <% @responses.each do |response| %>
+          <tr>
+            <td><%= @questions.where(question_number: response.question_number).first.question_text %></td>
+            <td><%= response.response_option_number.nil? ? "" : @questions.where(question_number: response.question_number).first.options_list[response.response_option_number] %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
 
-  <br>
-<% else %>
-  <h2> No Record of Completing the "<%= @survey.survey_name%>" Survey</h2>
-<% end %>
+    <br>
+    <%= link_to 'Back to Surveys', surveys_path %>
+
+    <br>
+  <% else %>
+    <h2> No Record of Completing the "<%= @survey.survey_name%>" Survey</h2>
+  <% end %>
+</div>
