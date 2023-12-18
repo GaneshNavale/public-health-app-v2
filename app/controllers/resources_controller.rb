@@ -3,7 +3,9 @@ class ResourcesController < ApplicationController
 
   # GET /resources or /resources.json
   def index
-    @local_resources = LocalResource.where(zip: current_user.zip)
+    @local_resources = LocalResource.near(current_user.zip)
+    @geocoded_data = []
+    @local_resources.each_with_index { |r, i| @geocoded_data << {latitude: r.latitude, longitude: r.longitude, label: "#{i+1} #{r.name}", tooltip: r.address} }
     @resources = Resource.all
   end
 

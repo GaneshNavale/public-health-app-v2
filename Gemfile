@@ -16,9 +16,11 @@ gem "puma", "~> 5.0"
 gem "importmap-rails"
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails"
-
+gem 'geocoder', '~> 1.3', '>= 1.3.7'
+gem "mapkick-rb", '0.1.2'
+gem 'aws-sdk-locationservice'
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
-# gem "stimulus-rails"
+gem "stimulus-rails"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
