@@ -2,8 +2,9 @@
 <p style="color: green"><%= notice %></p>
 <div class="pb-2"><h1>Local Resources near <%= current_user.zip %> </h1></div>
 <div id="resources">
-  <% @local_resources.each do |resource| %>
-    <h2><%= resource.name %> </h2>
+  <%= js_map @geocoded_data %>
+  <% @local_resources.each_with_index do |resource, index| %>
+    <h2><%= "#{index + 1}. #{resource.name}" %> </h2>
     <ul>
       <% if resource.website.present? %>
         <li>
@@ -35,22 +36,13 @@
   <%= submit_tag "Choose a Category" %>
 <% end %>
 
-<% if params[:category].present? %>
-  <% category = params[:category] %>
-  <% phrase = SearchItem.find_by(category: category).phrase %>
-  <h2> Google Search Results for "<%=phrase %> near <%=current_user.zip %>" </h2>
-  <%= link_to "#{category} Resources", "https://www.google.com/maps/search/#{phrase.gsub(" ", "+").gsub("/", "%2F")}+near+#{CGI.escape(current_user.zip)}", target: :_blank %>
-
-  <h2> 211texas Search Results for "<%=phrase %> near <%=current_user.zip %>" </h2>
-  <%= link_to "#{category} Resources", "https://www.211texas.org/search/?Search=#{phrase.gsub(" ", "+")}&org=72605&Count=5&NameOnly=True&pst=Coverage&sort=Proximity&TaxExact=False&Country=United+States&StateProvince=TX&County=-1&City=-1&PostalCode=#{CGI.escape(current_user.zip)}", target: :_blank %>
-<% else %>
-<% category = "Food Security" %>
+<% category = params[:category].presence || "Food Security" %>
 <% phrase = SearchItem.find_by(category: category).phrase %>
 <h2> Google Search Results for "<%=phrase %> near <%=current_user.zip %>" </h2>
 <%= link_to "#{category} Resources", "https://www.google.com/maps/search/#{phrase.gsub(" ", "+").gsub("/", "%2F")}+near+#{CGI.escape(current_user.zip)}", target: :_blank %>
+<% if category == "Food Security" %>
+  <h2> 211texas Search Results for "<%=phrase %> near <%=current_user.zip %>" </h2>
 
-<h2> 211texas Search Results for "<%=phrase %> near <%=current_user.zip %>" </h2>
-<%= link_to "#{category} Resources", "https://www.211texas.org/search/?Search=#{phrase.gsub(" ", "+")}&org=72605&Count=5&NameOnly=True&pst=Coverage&sort=Proximity&TaxExact=False&Country=United+States&StateProvince=TX&County=-1&City=-1&PostalCode=#{CGI.escape(current_user.zip)}", target: :_blank %>
-
+  <%= link_to "#{category} Resources", "https://www.211texas.org/guided_search/?ds=#{CGI.escape('{"service\\\\service_taxonomy\\\\module_servicepost":{"value":[{"taxonomy_id":7},{"taxonomy_id":8},{"taxonomy_id":11}],"operator":["contains_array"]},"site\\\\site_addressus\\\\site_addressus":{"site\\\\site_addressus\\\\site_addressus\\\\zip":{"value":"' + current_user.zip.to_s + '","operator":["orderbyasc"]}},"agency\\\\agency_system\\\\name":{"value":"VLTEST","operator":["notequals"]}}')}", target: "_blank" %>
 <% end %>
 </div>
