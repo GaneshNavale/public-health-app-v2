@@ -1,5 +1,6 @@
 class Survey < ApplicationRecord
   has_many :questions
+  has_many :responses
 
   def self.ransackable_associations(auth_object = nil)
     ["questions"]

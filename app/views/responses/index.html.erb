@@ -4,7 +4,7 @@
     <p> Survey Completed on <%= @latest_time_submitted.localtime.strftime("%B %d, %Y")%></p>
 
     <% if @category.present? %>
-      <p> Category: <%= @category[:category] %> </p>
+      <h1> Category: <%= @category[:category] %> </h1>
     <% end %>
     <p>
       <%= link_to "See Resources", resources_path(category: @survey.survey_category) %>
